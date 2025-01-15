@@ -18,7 +18,7 @@ export default [
       prettier: prettierPlugin,
     },
     rules: {
-      'linebreak-style': ['error', 'unix'],
+      'linebreak-style': 'off',
       'react/react-in-jsx-scope': 'off', // React 17+에서는 필요 없음
       'prettier/prettier': 'warn', // Prettier 규칙 준수 여부 경고
       'react/jsx-uses-react': 'off',

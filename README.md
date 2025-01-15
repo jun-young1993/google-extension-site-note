@@ -2,6 +2,7 @@ https://dev.to/anobjectisa/build-a-chrome-extension-using-reactjs-38o7
 https://techblog.woowahan.com/5900/
 https://developer.chrome.com/docs/extensions/develop/concepts/content-scripts?hl=ko#dynamic-declarative
 https://velog.io/@broccolism/%ED%81%AC%EB%A1%AC-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%EB%81%BC%EB%A6%AC-%ED%86%B5%EC%8B%A0%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -26,7 +27,7 @@ export default tseslint.config({
       tsconfigRootDir: import.meta.dirname,
     },
   },
-})
+});
 ```
 
 - Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
@@ -35,7 +36,7 @@ export default tseslint.config({
 
 ```js
 // eslint.config.js
-import react from 'eslint-plugin-react'
+import react from 'eslint-plugin-react';
 
 export default tseslint.config({
   // Set the react version
@@ -50,5 +51,5 @@ export default tseslint.config({
     ...react.configs.recommended.rules,
     ...react.configs['jsx-runtime'].rules,
   },
-})
+});
 ```
