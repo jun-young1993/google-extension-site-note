@@ -62,12 +62,12 @@ const Popup = () => {
         <div className="w-full max-w-md bg-white shadow-lg rounded-lg">
           {/* Header */}
           <div className="bg-blue-500 text-white px-6 py-4 rounded-t-lg">
-            <h2 className="text-lg font-bold">Edit Note</h2>
+            <h2 className="text-lg font-bold"></h2>
             <p className="text-sm text-blue-200 truncate">{currentTab.title}</p>
           </div>
 
           {/* Editor Content */}
-          <div className="px-6 py-4">
+          <div className="px-6 py-4 min-h-screen">
             <InitializeMDXEditor
               editorRef={editor}
               autoFocus={{

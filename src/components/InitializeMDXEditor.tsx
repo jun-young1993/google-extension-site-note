@@ -16,7 +16,7 @@ import {
   codeMirrorPlugin,
   directivesPlugin,
   AdmonitionDirectiveDescriptor,
-  diffSourcePlugin,
+  //   diffSourcePlugin,
   markdownShortcutPlugin,
   SandpackConfig,
   MDXEditor,
@@ -53,32 +53,34 @@ const reactSandpackConfig: SandpackConfig = {
     },
   ],
 };
-const allPlugins = (diffMarkdown: string) => [
-  toolbarPlugin({ toolbarContents: () => <KitchenSinkToolbar /> }),
-  listsPlugin(),
-  quotePlugin(),
-  headingsPlugin(),
-  linkPlugin(),
-  linkDialogPlugin(),
+const allPlugins = () =>
+  // diffMarkdown: string
+  [
+    toolbarPlugin({ toolbarContents: () => <KitchenSinkToolbar /> }),
+    listsPlugin(),
+    quotePlugin(),
+    headingsPlugin(),
+    linkPlugin(),
+    linkDialogPlugin(),
 
-  imagePlugin({ imageUploadHandler: async () => '/sample-image.png' }),
-  tablePlugin(),
-  thematicBreakPlugin(),
-  frontmatterPlugin(),
-  codeBlockPlugin({ defaultCodeBlockLanguage: 'txt' }),
-  sandpackPlugin({ sandpackConfig: reactSandpackConfig }),
-  codeMirrorPlugin({
-    codeBlockLanguages: {
-      js: 'JavaScript',
-      css: 'CSS',
-      txt: 'text',
-      tsx: 'TypeScript',
-    },
-  }),
-  directivesPlugin({ directiveDescriptors: [AdmonitionDirectiveDescriptor] }),
-  diffSourcePlugin({ viewMode: 'rich-text', diffMarkdown }),
-  markdownShortcutPlugin(),
-];
+    imagePlugin({ imageUploadHandler: async () => '/sample-image.png' }),
+    tablePlugin(),
+    thematicBreakPlugin(),
+    frontmatterPlugin(),
+    codeBlockPlugin({ defaultCodeBlockLanguage: 'txt' }),
+    sandpackPlugin({ sandpackConfig: reactSandpackConfig }),
+    codeMirrorPlugin({
+      codeBlockLanguages: {
+        js: 'JavaScript',
+        css: 'CSS',
+        txt: 'text',
+        tsx: 'TypeScript',
+      },
+    }),
+    directivesPlugin({ directiveDescriptors: [AdmonitionDirectiveDescriptor] }),
+    //   diffSourcePlugin({ viewMode: 'rich-text', diffMarkdown }),
+    markdownShortcutPlugin(),
+  ];
 
 /**
  * @url https://github.com/mdx-editor/site/blob/master/app/DemoEditor.tsx
@@ -101,7 +103,7 @@ export default function InitializeMDXEditor({
       markdown={markdown}
       className="full-demo-mdxeditor"
       contentEditableClassName="prose min-h-32 h-full max-w-full font-sans"
-      plugins={allPlugins(markdown)}
+      plugins={allPlugins()}
     />
   );
 }
