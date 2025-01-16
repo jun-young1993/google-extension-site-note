@@ -1,6 +1,6 @@
 import IndexedDBHelper from './utills/IndexedDBHelper';
 
-const dbHelper = new IndexedDBHelper('SiteNoteDB', 'notes')
+const dbHelper = new IndexedDBHelper('SiteNoteDB', 'notes');
 dbHelper.init().catch((err) => console.error('Failed to initialize DB:', err));
 
 chrome.runtime.onInstalled.addListener(() => {

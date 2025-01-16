@@ -1,10 +1,16 @@
 import { defineConfig } from 'vite';
+import svgr from 'vite-plugin-svgr';
 import react from '@vitejs/plugin-react-swc';
 import path from 'path';
 
 // 공통 설정
 const commonConfig = defineConfig({
-  plugins: [react()],
+  plugins: [
+    svgr({
+      include: '**/*.svg?react',
+    }),
+    react(),
+  ],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),

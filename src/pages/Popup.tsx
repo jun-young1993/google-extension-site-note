@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import InitializeMDXEditor from '../components/InitializeMDXEditor';
 import { MDXEditorMethods } from '@mdxeditor/editor';
+import { ListIcon } from '../components/icons';
+import BaseButton from '../components/BaseButton';
 
 const getCurrentTab = (): Promise<chrome.tabs.Tab> => {
   return new Promise<chrome.tabs.Tab>((resolve, reject) => {
@@ -61,8 +63,12 @@ const Popup = () => {
         {/* Popup Editor */}
         <div className="w-full max-w-md bg-white shadow-lg rounded-lg">
           {/* Header */}
-          <div className="bg-blue-500 text-white px-6 py-4 rounded-t-lg">
-            <h2 className="text-lg font-bold"></h2>
+          <div className="bg-blue-500 text-white px-6 py-4 rounded-t-lg gap-1.5">
+            <div className="flex">
+              <BaseButton>
+                <ListIcon width={'20px'} height={'20px'} />
+              </BaseButton>
+            </div>
             <p className="text-sm text-blue-200 truncate">{currentTab.title}</p>
           </div>
 
