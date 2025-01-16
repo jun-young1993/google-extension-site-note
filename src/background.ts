@@ -3,22 +3,7 @@ import IndexedDBHelper from './utills/IndexedDBHelper';
 const dbHelper = new IndexedDBHelper('SiteNoteDB', 'notes');
 dbHelper.init().catch((err) => console.error('Failed to initialize DB:', err));
 
-chrome.runtime.onInstalled.addListener(() => {
-  chrome.scripting
-    .registerContentScripts([
-      {
-        id: 'session-script',
-        js: ['content.js'],
-        css: ['tailwind.css'],
-        persistAcrossSessions: false,
-        matches: ['<all_urls>'], // 모든 URL에 적용
-        runAt: 'document_idle', // 돔 완전히 실행후를 보장
-        // runAt: "document_start",
-      },
-    ])
-    .then(() => {})
-    .catch((err) => console.error('Error registering content script', err));
-});
+
 
 chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
   if (message.type === 'GET_CURRENT_TAB') {
@@ -54,4 +39,21 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
       });
     return true; // Keep the message channel open for async response
   }
+});
+
+chrome.runtime.onInstalled.addListener(() => {
+  chrome.scripting
+    .registerContentScripts([
+      {
+        id: 'session-script',
+        js: ['content.js'],
+        css: ['tailwind.css'],
+        persistAcrossSessions: false,
+        matches: ['<all_urls>'], // 모든 URL에 적용
+        runAt: 'document_idle', // 돔 완전히 실행후를 보장
+        // runAt: "document_start",
+      },
+    ])
+    .then(() => {})
+    .catch((err) => console.error('Error registering content script', err));
 });

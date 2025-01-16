@@ -101,8 +101,8 @@ export default function InitializeMDXEditor({
       {...props}
       ref={editorRef}
       markdown={markdown}
-      className="full-demo-mdxeditor"
-      contentEditableClassName="prose min-h-32 h-full max-w-full font-sans"
+      className="full-demo-mdxeditor h-full"
+      contentEditableClassName="prose h-full max-w-full font-sans"
       plugins={allPlugins()}
     />
   );

@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import InitializeMDXEditor from '../components/InitializeMDXEditor';
 import { MDXEditorMethods } from '@mdxeditor/editor';
-import { ListIcon } from '../components/icons';
-import BaseButton from '../components/BaseButton';
+import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
+import InitializeMDXEditor from '../components/InitializeMDXEditor';
 
 const getCurrentTab = (): Promise<chrome.tabs.Tab> => {
   return new Promise<chrome.tabs.Tab>((resolve, reject) => {
@@ -61,28 +60,31 @@ const Popup = () => {
     currentTab && (
       <div className="bg-gray-100 flex items-center justify-center">
         {/* Popup Editor */}
-        <div className="w-full max-w-md bg-white shadow-lg rounded-lg">
+        <div className="w-full bg-white shadow-lg rounded-lg">
           {/* Header */}
-          <div className="bg-blue-500 text-white px-6 py-4 rounded-t-lg gap-1.5">
-            <div className="flex">
-              <BaseButton>
-                <ListIcon width={'20px'} height={'20px'} />
-              </BaseButton>
-            </div>
+          <div className="bg-sky-500 text-white px-6 py-4 rounded-t-lg gap-1.5">
             <p className="text-sm text-blue-200 truncate">{currentTab.title}</p>
           </div>
 
           {/* Editor Content */}
-          <div className="px-6 py-4 min-h-screen">
-            <InitializeMDXEditor
-              editorRef={editor}
-              autoFocus={{
-                defaultSelection: 'rootEnd',
-                preventScroll: true,
-              }}
-              markdown={note}
-              onChange={(value) => setNote(value)}
-            />
+          <div className="px-1 py-1 ">
+            <PanelGroup direction="horizontal">
+              <Panel className="border-solid border-2 border-sky-200 h-full p-1">
+                <InitializeMDXEditor
+                  editorRef={editor}
+                  autoFocus={{
+                    defaultSelection: 'rootEnd',
+                    preventScroll: true,
+                  }}
+                  markdown={note}
+                  onChange={(value) => setNote(value)}
+                />
+              </Panel>
+              <PanelResizeHandle className="pl-0.5 pr-0.5" />
+              <Panel defaultSize={10} className="border-double border-2">
+                <div>hi</div>
+              </Panel>
+            </PanelGroup>
           </div>
         </div>
       </div>
