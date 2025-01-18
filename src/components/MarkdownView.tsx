@@ -10,7 +10,7 @@ const MarkdownView = ({markdown} : MarkdownViewProps) => {
         if (editor && editor.current && markdown) {
             editor.current?.setMarkdown(markdown);
         }
-    },[])
+    },[editor])
     return (
         <InitializeMDXEditor
             editorRef={editor}
