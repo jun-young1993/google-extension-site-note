@@ -1,1 +1,6 @@
 @import '../../node_modules/@mdxeditor/editor/dist/style.css';
+
+.full-demo-mdxeditor .mdxeditor-root-contenteditable {
+    overflow: scroll;
+    height: 100%;
+}

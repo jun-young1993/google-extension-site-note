@@ -107,3 +107,4 @@ export default function InitializeMDXEditor({
     />
   );
 }
+// _rootContentEditableWrapper_uazmk_1097 mdxeditor-root-contenteditable
