@@ -25,7 +25,7 @@ import {
 } from '@mdxeditor/editor';
 
 import '../styles/tailwind.css';
-import { ForwardedRef } from 'react';
+import {ForwardedRef} from 'react';
 
 const defaultSnippetContent = `
 export default function App() {
@@ -91,19 +91,27 @@ const allPlugins = () =>
 export default function InitializeMDXEditor({
   markdown,
   editorRef,
+  usePlugin = true,
+  addClassName = '',
+    autoSetMarkdown,
   ...props
 }: {
   markdown: string;
   editorRef: ForwardedRef<MDXEditorMethods> | null;
+  usePlugin?: boolean
+  addClassName?: string
+  autoSetMarkdown?: boolean
 } & MDXEditorProps) {
+
+
   return (
     <MDXEditor
       {...props}
       ref={editorRef}
       markdown={markdown}
-      className="full-demo-mdxeditor h-full"
-      contentEditableClassName="prose h-full max-w-full font-sans"
-      plugins={allPlugins()}
+      className={`full-demo-mdxeditor h-full`}
+      contentEditableClassName={`prose h-full max-w-full font-sans ${addClassName}`}
+      plugins={ usePlugin ? allPlugins() : []}
     />
   );
 }

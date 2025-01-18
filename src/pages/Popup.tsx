@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { MDXEditorMethods } from '@mdxeditor/editor';
 import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
 import InitializeMDXEditor from '../components/InitializeMDXEditor';
+import DomainItemList from "../components/DomainItemList";
 
 const getCurrentTab = (): Promise<chrome.tabs.Tab> => {
   return new Promise<chrome.tabs.Tab>((resolve, reject) => {
@@ -18,6 +19,7 @@ const getCurrentTab = (): Promise<chrome.tabs.Tab> => {
 const Popup = () => {
   const [currentTab, setCurrentTab] = useState<chrome.tabs.Tab | null>(null);
   const [note, setNote] = useState<string>('');
+  const [domainNotes, setDomainNotes] = useState<any[]>([]);
   const editor = useRef<MDXEditorMethods | null>(null);
 
   useEffect(() => {
@@ -36,20 +38,28 @@ const Popup = () => {
             }
           }
         );
+
+        const domain = new URL(tab.url).hostname;
+        chrome.runtime.sendMessage(
+            { type: 'GET_DOMAIN_NOTES', payload: { domain: domain } },
+            (response) => {
+              setDomainNotes(response);
+            }
+        );
       }
     };
-
     getTabInfo();
   }, []);
+
   useEffect(() => {
     // Save note when the popup is closed
-
     if (currentTab?.url && note.trim()) {
       chrome.runtime.sendMessage({
         type: 'SAVE_NOTE',
         payload: {
           id: currentTab.url,
           url: currentTab.url,
+          title: currentTab.title,
           data: note,
         },
       });
@@ -69,7 +79,7 @@ const Popup = () => {
           {/* Editor Content */}
           <div className="px-1 py-1 flex flex-1 h-80">
             <PanelGroup direction="horizontal">
-              <Panel className="border-solid border-2 border-sky-200 h-full p-1 overflow-scroll">
+              <Panel className="border-solid border-2 border-sky-200 h-full p-1">
                 <InitializeMDXEditor
                   editorRef={editor}
                   autoFocus={{
@@ -81,8 +91,11 @@ const Popup = () => {
                 />
               </Panel>
               <PanelResizeHandle className="pl-0.5 pr-0.5" />
-              <Panel defaultSize={10} className="border-double border-2 overflow-scroll">
-                <div>hi</div>
+              <Panel defaultSize={10} className="border-double border-2">
+                <DomainItemList
+                  items={domainNotes}
+                  currentTab={currentTab}
+                />
               </Panel>
             </PanelGroup>
           </div>

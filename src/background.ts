@@ -1,6 +1,6 @@
 import IndexedDBHelper from './utills/IndexedDBHelper';
 
-const dbHelper = new IndexedDBHelper('SiteNoteDB', 'notes');
+const dbHelper = new IndexedDBHelper('SiteNoteDB', 'notes', 3);
 dbHelper.init().catch((err) => console.error('Failed to initialize DB:', err));
 
 
@@ -14,9 +14,10 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
     return true; // Async response
   }
   if (message.type === 'SAVE_NOTE') {
-    const { id, url, data } = message.payload;
+    const { id, url, data, title } = message.payload;
+    const urlInfo = new URL(url)
     dbHelper
-      .put({ id, url, data: data })
+      .put({ id, url, data: data, domain: urlInfo.hostname, created_at: new Date(), title: title })
       .then(() => {
         sendResponse({ success: true });
       })
@@ -39,21 +40,18 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
       });
     return true; // Keep the message channel open for async response
   }
-});
 
-chrome.runtime.onInstalled.addListener(() => {
-  chrome.scripting
-    .registerContentScripts([
-      {
-        id: 'session-script',
-        js: ['content.js'],
-        css: ['tailwind.css'],
-        persistAcrossSessions: false,
-        matches: ['<all_urls>'], // 모든 URL에 적용
-        runAt: 'document_idle', // 돔 완전히 실행후를 보장
-        // runAt: "document_start",
-      },
-    ])
-    .then(() => {})
-    .catch((err) => console.error('Error registering content script', err));
+  if(message.type === 'GET_DOMAIN_NOTES') {
+    const { domain } = message.payload;
+    dbHelper
+        .getByDomain(domain)
+        .then((notes) => {
+          console.log("=>(background.ts:50) notes", notes);
+          sendResponse(notes);
+        })
+        .catch((err) => {
+          console.error('Failed to fetch notes by domain:', err);
+        });
+    return true;
+  }
 });
