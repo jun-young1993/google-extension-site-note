@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Site Note",
-  "version": "1.0",
+  "version": "1.1",
   "description": "Easily create, save, and manage notes for specific websites and pages directly from your browser!",
   "permissions": ["tabs", "activeTab"],
   "background": {
