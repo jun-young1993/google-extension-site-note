@@ -75,7 +75,7 @@ const Popup = () => {
 
   return (
     currentTab && (
-      <div className="h-96 w-[50rem] bg-gray-100 flex items-start justify-center">
+      <div className="h-full w-full bg-gray-100 flex items-start justify-center">
         {/* Popup Editor */}
         <div className="w-full h-full bg-white shadow-lg rounded-lg flex flex-col">
           {/* Header */}
