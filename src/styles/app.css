@@ -1,0 +1,7 @@
+/* 루트 형제 요소에 계속 생기는 버 */
+#root ~ .mdxeditor-popup-container,
+#root ~ ._editorRoot_uazmk_53,
+#root ~ ._popupContainer_uazmk_1220,
+#root ~ .full-demo-mdxeditor {
+  display: none !important;
+}
