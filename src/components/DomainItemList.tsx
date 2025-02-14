@@ -32,9 +32,8 @@ const DomainItemList = ({items, currentTab}: DomainItemListProps) => {
 
                                     </div>
                                 </div>
-                                <div className="border-solid border-sky-200">
+                                <div className="border-solid border-sky-200 max-h-[45px]">
                                     <MarkdownView markdown={item.data}/>
-                                    {/*<a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">Edit</a>*/}
                                 </div>
                             </div>
                         </li>
