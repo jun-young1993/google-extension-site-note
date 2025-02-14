@@ -1,5 +1,5 @@
 {
-  "name": "google-extension-tab-manager",
+  "name": "google-extension-site-note",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -12,8 +12,10 @@
     "build:assets:watch": "run-p build:content:watch build:tailwind:watch",
     "build:assets": "run-p build:content build:tailwind",
     "build:main": "vite build",
-    "build": "tsc -b && npm run build:main && npm run build:content && npm run build:tailwind",
+    "build:prd": "tsc -b && npm run build:main && npm run build:content && npm run build:tailwind",
+    "build:dev": "tsc -b && npm run build:main && npm run build:content && npm run build:tailwind && npm run dist:dev",
     "build:watch": "tsc -b && vite build --watch",
+    "dist:dev": "node buildScript.js",
     "lint": "eslint . --fix",
     "preview": "vite preview"
   },

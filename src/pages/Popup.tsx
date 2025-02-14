@@ -58,16 +58,16 @@ const Popup = () => {
 
   return (
     currentTab && (
-      <div className="bg-gray-100 flex items-center justify-center">
+      <div className="bg-gray-100 flex items-center justify-center h-[100vh] w-[100vw]">
         {/* Popup Editor */}
-        <div className="w-full bg-white shadow-lg rounded-lg">
+        <div className="w-full bg-white shadow-lg rounded-lg h-full flex flex-col">
           {/* Header */}
           <div className="bg-sky-500 text-white px-6 py-4 rounded-t-lg gap-1.5">
             <p className="text-sm text-blue-200 truncate">{currentTab.title}</p>
           </div>
 
           {/* Editor Content */}
-          <div className="px-1 py-1 ">
+          <div className="px-1 py-1 flex-1">
             <PanelGroup direction="horizontal">
               <Panel className="border-solid border-2 border-sky-200 h-full p-1">
                 <InitializeMDXEditor
